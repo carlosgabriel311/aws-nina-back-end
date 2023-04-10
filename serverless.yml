@@ -1,0 +1,37 @@
+org: carlosg
+app: aws-nina
+service: aws-nina
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+
+functions:
+  create_product:
+    handler: create_product.lambda_handler
+  update_product:
+    handler: update_product.lambda_handler
+  get_product:
+    handler: get_product.lambda_handler
+  delete_product:
+    handler: delete_product.lambda_handler
+  create_media:
+    handler: create_media.lambda_handler
+  insert_media:
+    handler: insert_media.lambda_handler
+    events:
+      - s3:
+          bucket: myawsninabucketimages
+          event: s3:ObjectCreated:*
+          existing: true
+  delete_media:
+    handler: delete_media.lambda_handler
+  remove_media:
+    handler: remove_media.lambda_handler
+    events:
+      - s3:
+          bucket: myawsninabucketimages
+          event: s3:ObjectRemoved:*
+          existing: true
